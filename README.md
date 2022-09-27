@@ -16,9 +16,29 @@ Notebooks:
 
 Cuilin goes here, set up your own section name
 
-Yuchen goes here, set up your own section name
+### Text Parsing and Weight Calculation
 
-### Return calculation, data match, and plot generation
+#### Text Parsing
+
+First, we make all words in filings lowercase to make it easier for processing. We do the same for both the FinNeg and H4N dictionary. Then, we filter out the words with length one and two, we believe these words are meaningless words. Next, we filter out stop words using the `stopwords` class in `nltk`.
+
+In addition, we lemmatize the words. Lemmatization means changing words back to its original form (the same word could appear in adjective, verb, or noun shapes, etc.) This helps us to better clean the words and calculate the weights.
+
+#### Weight Calculation
+
+First, we vectorize the words using `TfidfVectorizer()`. Note here we need to feed in all document at once as this is required by tf.idf calculation. A computed word matrix is:
+
+<img width="708" alt="Screen Shot 2022-09-27 at 16 19 10" src="https://user-images.githubusercontent.com/50337211/192627139-3bef0311-7d4c-4bf4-b63e-3e4b90e1f35c.png">
+
+Fun fact here: the words look like gibberish to us at first, but they actually are real words!
+
+Now that we have the matrix, we can easily calculate the proportions and the tf.idf weighted scores. The tf.idf weighted score is just $\frac{w_i}{\sum_i w_i}$, where $w_i$ is the weight of word $i$ and $\sum_i w_i$ is summing over one document. The resulting table looks like:
+
+<img width="499" alt="Screen Shot 2022-09-27 at 16 21 37" src="https://user-images.githubusercontent.com/50337211/192627560-3f965ba7-5c66-424c-b7bc-0ed29e4f8e39.png">
+
+This score table will be passed down to the next section.
+
+### Return Calculation, Data Match, and Plot Generation
 
 #### Data
 I download the S&P500 daily return data from WRDS:
@@ -46,6 +66,7 @@ Here is our final plot:
 ![image](https://user-images.githubusercontent.com/50337211/192438323-3149714b-cfa5-46d8-811f-153e92de09b4.png)
 
 ### Conclusion
+
 
 There is a slight difference between using proportional weights and tf.idf weights. The H4N dictionary does not perform well, as expected. However, we are not able to reproduce a decreasing line for the FinNeg dictionary. In addition, if we use more quantiles, the plot does not show a clear pattern:
 
