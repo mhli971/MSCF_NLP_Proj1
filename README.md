@@ -31,6 +31,7 @@ I download the individual stock return data using `yfinance`
 
 #### Calculation
 For each filing date, I calculate the close price return between 3 days later and the day before the filing date. For the market return, I just sum the daily returns. Then, access return across the 4 days = stock return - market return. A typical access return distribution is:
+
 ![image](https://user-images.githubusercontent.com/50337211/192438238-fa1a1d4e-54b5-40cf-b7e4-734e7e95a65b.png)
 
 After the access returns are obtained, I find those with the filing date and split them in terms of score quantiles.
@@ -47,6 +48,7 @@ Here is our final plot:
 ### Conclusion
 
 There is a slight difference between using proportional weights and tf.idf weights. The H4N dictionary does not perform well, as expected. However, we are not able to reproduce a decreasing line for the FinNeg dictionary. In addition, if we use more quantiles, the plot does not show a clear pattern:
+
 ![image](https://user-images.githubusercontent.com/50337211/192439231-f2baa78f-5926-4a22-8a55-13b83f8b0f09.png)
 
 We went through our code and did not find errors that could be related to this problem.
