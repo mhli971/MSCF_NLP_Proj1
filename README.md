@@ -16,7 +16,13 @@ Notebooks:
 
 ### Files Downloading and Parsing
 
-We firstly downloaded all 10-K and 10-Q documents on the EDGAR website for the period 2016 to 2021 using CIK of companies listed on S&P500. Each downloaded text file is parsing by removing graphics, headers, exhibits, tables and other necessary cleaning process to translate into a single string variable.
+We firstly downloaded all 10-K and 10-Q documents on the EDGAR website for the period 2016 to 2021 using CIK of companies listed on S&P500. Due to the security reason, SEC website is forbidden using normal request. So we are using Selenium to run the web driver and access the website.
+
+Then each downloaded text file is parsing using BeautifulSoup . The following cleaning process is performed and the file is translated into a single string variable.
+
+- Remove graphics, SEC header, exhibits using Regular Expression.
+- Re-encode characters back to their original ACSII form using HTML2Text handler.
+- Remove tables using Regular Expression.
 
 There are roughly 12000 text files in total, which we are using for the next steps.
 
