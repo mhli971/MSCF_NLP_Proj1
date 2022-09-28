@@ -14,7 +14,9 @@ Notebooks:
 
 ## Report
 
-Cuilin goes here, set up your own section name
+### Files Downloading and Parsing
+
+We firstly downloaded all 10-K and 10-Q documents on the EDGAR website for the period 2016 to 2021 for companies listed on S&P500. Each downloaded text file is parsing by removing graphics, headers, exhibits and tables to translate into a single string variable.  
 
 ### Text Parsing and Weight Calculation
 
